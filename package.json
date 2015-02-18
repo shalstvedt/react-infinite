@@ -1,6 +1,6 @@
 {
   "name": "react-infinite-extended",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A browser-ready efficient scrolling container based on UITableView with support for non-uniform row height",
   "main": "dist/react-infinite.js",
   "repository": {
