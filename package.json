@@ -1,11 +1,11 @@
 {
-  "name": "react-infinite",
+  "name": "react-infinite-extended",
   "version": "0.2.3",
-  "description": "A browser-ready efficient scrolling container based on UITableView",
+  "description": "A browser-ready efficient scrolling container based on UITableView with support for non-uniform row height",
   "main": "dist/react-infinite.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/seatgeek/react-infinite"
+    "url": "https://github.com/shalstvedt/react-infinite-extended"
   },
   "keywords": [
     "react",
@@ -17,7 +17,7 @@
   "author": "Gareth Tan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/seatgeek/react-infinite/issues"
+    "url": "https://github.com/shalstvedt/react-infinite-extended/issues"
   },
   "scripts": {
     "test": "jest"
@@ -28,7 +28,7 @@
       "<rootDir>/node_modules/react"
     ]
   },
-  "homepage": "https://github.com/seatgeek/react-infinite",
+  "homepage": "https://github.com/shalstvedt/react-infinite-extended",
   "devDependencies": {
     "gulp": "^3.8.8",
     "gulp-concat": "^2.4.3",
