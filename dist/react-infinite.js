@@ -84,7 +84,10 @@
           preloadAdditionalHeight: preloadAdditionalHeight,
 
           scrollTimeout: undefined,
-          isScrolling: false
+          isScrolling: false,
+
+          extendedScrolledPast: false
+
         };
       },
 
@@ -130,7 +133,7 @@
       },
 
       computeTotalScrollableHeight: function() {
-        return this.props.elementHeight * this.props.children.length;
+        return this.props.elementHeight * this.props.children.length + (this.state.extendedScrolledPast ? 0 : this.props.extendedHeight);
       },
 
       getScrollTop: function() {
@@ -146,8 +149,11 @@
       // from any actual representation in the DOM.
       setStateFromScrollTop: function(scrollTop) {
         var blockNumber = Math.floor(scrollTop / this.state.preloadBatchSize),
-            blockStart = this.state.preloadBatchSize * blockNumber,
-            blockEnd = blockStart + this.state.preloadBatchSize,
+            blockStart = this.state.preloadBatchSize * blockNumber;
+            if (this.props.extendedBlock < blockNumber) {
+                blockStart = blockStart - this.props.extendedHeight;
+            }
+            var blockEnd = blockStart + this.state.preloadBatchSize,
             windowTop = Math.max(0, blockStart - this.state.preloadAdditionalHeight),
             windowBottom = Math.min(this.computeTotalScrollableHeight(),
                             blockEnd + this.state.preloadAdditionalHeight);
@@ -159,7 +165,8 @@
           displayIndexStart: displayIndexStart,
           displayIndexEnd: displayIndexEnd,
           currentScrollTop: scrollTop,
-          previousScrollTop: this.state.currentScrollTop
+          previousScrollTop: this.state.currentScrollTop,
+          extendedScrolledPast: this.props.extendedIndex < displayIndexStart
         });
       },
 
@@ -211,7 +218,8 @@
         return {
           height: this.props.containerHeight,
           overflowX: 'hidden',
-          overflowY: 'scroll'
+          overflowY: 'scroll',
+          '-webkit-overflow-scrolling': 'touch'
         };
       },
 
@@ -223,7 +231,7 @@
       },
 
       render: function() {
-        var topHeight = this.state.displayIndexStart * this.props.elementHeight,
+        var topHeight = this.state.displayIndexStart * this.props.elementHeight + (this.state.extendedScrolledPast ? this.props.extendedHeight : 0),
             bottomHeight = (this.props.children.length -
                              this.state.displayIndexEnd) *
                               this.props.elementHeight,
