@@ -218,7 +218,8 @@
         return {
           height: this.props.containerHeight,
           overflowX: 'hidden',
-          overflowY: 'scroll'
+          overflowY: 'scroll',
+          '-webkit-overflow-scrolling': 'touch'
         };
       },
 
