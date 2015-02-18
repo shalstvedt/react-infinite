@@ -222,12 +222,6 @@
         };
       },
 
-      loadingSpinnerDisplay: function() {
-        return {
-          display: this.state.isInfiniteLoading ? 'block' : 'none'
-        };
-      },
-
       render: function() {
         var topHeight = this.state.displayIndexStart * this.props.elementHeight,
             bottomHeight = (this.props.children.length -
