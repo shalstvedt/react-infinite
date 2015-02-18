@@ -14,7 +14,7 @@
     "uitableview",
     "infinite"
   ],
-  "author": "Gareth Tan",
+  "author": "Scott Halstvedt",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shalstvedt/react-infinite-extended/issues"
