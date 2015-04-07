@@ -161,6 +161,8 @@
         var displayIndexStart = Math.floor(windowTop / this.props.elementHeight),
             displayIndexEnd = Math.ceil(windowBottom / this.props.elementHeight);
 
+	if(this.state.displayIndexStart != displayIndexStart && this.props.scrollNumberCallback) { this.props.scrollNumberCallback(displayIndexStart); }
+
         this.setState({
           displayIndexStart: displayIndexStart,
           displayIndexEnd: displayIndexEnd,
