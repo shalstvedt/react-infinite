@@ -86,7 +86,8 @@
           scrollTimeout: undefined,
           isScrolling: false,
 
-          extendedScrolledPast: false
+          extendedScrolledPast: false,
+	  topItemIndex: 0
 
         };
       },
@@ -158,15 +159,22 @@
             windowBottom = Math.min(this.computeTotalScrollableHeight(),
                             blockEnd + this.state.preloadAdditionalHeight);
 
+	var topItemIndex = Math.floor(scrollTop / this.props.elementHeight);
+
         var displayIndexStart = Math.floor(windowTop / this.props.elementHeight),
             displayIndexEnd = Math.ceil(windowBottom / this.props.elementHeight);
+
+	if(this.state.topItemIndex != topItemIndex && this.props.scrollNumberCallback) {
+	    this.props.scrollNumberCallback(topItemIndex);
+	}
 
         this.setState({
           displayIndexStart: displayIndexStart,
           displayIndexEnd: displayIndexEnd,
           currentScrollTop: scrollTop,
           previousScrollTop: this.state.currentScrollTop,
-          extendedScrolledPast: this.props.extendedIndex < displayIndexStart
+          extendedScrolledPast: this.props.extendedIndex < displayIndexStart,
+	  topItemIndex: topItemIndex
         });
       },
 
