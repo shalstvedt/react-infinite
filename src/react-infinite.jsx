@@ -112,8 +112,10 @@
 
 	if(this.props.selectedItem !== nextSelectedItem) {
 	    this.setState(newStateObject, function() {
-	        that.setScrollTop(this.props.elementHeight*nextSelectedItem);
-	        that.setStateFromScrollTop(this.props.elementHeight*nextSelectedItem);
+	        if(!this.state.isScrolling) {
+	            that.setScrollTop(this.props.elementHeight*nextSelectedItem);
+	            that.setStateFromScrollTop(this.props.elementHeight*nextSelectedItem);
+		}
 	    });
 	} else {
 
