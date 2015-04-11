@@ -87,7 +87,8 @@
           isScrolling: false,
 
           extendedScrolledPast: false,
-	  topItemIndex: 0
+	  topItemIndex: 0,
+	  selectedItem: 0
 
         };
       },
@@ -106,9 +107,20 @@
         var nextPAH = nextProps.preloadAdditionalHeight;
         newStateObject.preloadAdditionalHeight = nextPAH ? nextPAH : nextProps.containerHeight;
 
-        this.setState(newStateObject, function() {
-          that.setStateFromScrollTop(that.getScrollTop());
-        });
+	var nextSelectedItem = nextProps.selectedItem;
+	newStateObject.selectedItem = nextSelectedItem ? nextSelectedItem : 0;
+
+	if(this.props.selectedItem !== nextSelectedItem) {
+	    this.setState(newStateObject, function() {
+	        that.setScrollTop(this.props.elementHeight*nextSelectedItem);
+	        that.setStateFromScrollTop(this.props.elementHeight*nextSelectedItem);
+	    });
+	} else {
+
+            this.setState(newStateObject, function() {
+              that.setStateFromScrollTop(that.getScrollTop());
+            });
+	}
       },
 
       componentDidUpdate: function(prevProps, prevState) {
@@ -135,6 +147,10 @@
 
       computeTotalScrollableHeight: function() {
         return this.props.elementHeight * this.props.children.length + (this.state.extendedScrolledPast ? 0 : this.props.extendedHeight);
+      },
+
+      setScrollTop: function(newTop) {
+        this.refs.scrollable.getDOMNode().scrollTop = newTop;
       },
 
       getScrollTop: function() {
